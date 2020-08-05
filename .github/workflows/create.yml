@@ -1,0 +1,20 @@
+name: Create eeting note
+
+on:
+  schedule:
+    - cron: '0 5 * * 3' # Every Wednesday afternoon
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v2
+      with:
+        token: ${{secrets.github_token}}
+    - uses: JasonEtco/create-an-issue@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        MEETING_SEQUENTIAL_ID: ${{steps.buildnumber.outputs.build_number}}
