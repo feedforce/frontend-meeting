@@ -1,4 +1,4 @@
-name: Create eeting note
+name: Create meeting note
 
 on:
   schedule:
